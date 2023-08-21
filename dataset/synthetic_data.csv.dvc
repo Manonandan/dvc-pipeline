@@ -1,0 +1,5 @@
+outs:
+- md5: 6a954f5181eb1c29d942bbb2e0ad8757
+  size: 40594
+  hash: md5
+  path: synthetic_data.csv
