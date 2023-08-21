@@ -9,4 +9,4 @@ y = (X[:, 0] + X[:, 1] > 1).astype(int)  # Target labels
 
 # Create a DataFrame and save to CSV
 data = pd.DataFrame({'feature1': X[:, 0], 'feature2': X[:, 1], 'label': y})
-data.to_csv('dataset/original/synthetic_data.csv', index=False)
+data.to_csv('dataset/synthetic_data.csv', index=False)
