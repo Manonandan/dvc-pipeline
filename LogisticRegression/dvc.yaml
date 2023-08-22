@@ -1,0 +1,24 @@
+stages:
+  create_data:
+    cmd: python3 ../create_data.py
+    outs:
+    - dataset/synthetic_data.csv
+  pre_process:
+    cmd: python3 src/prepare_dataset.py
+    deps:
+    - dataset/synthetic_data.csv
+    outs:
+    - dataset/test_data.csv
+    - dataset/train_data.csv
+  train:
+    cmd: python src/train_model.py --force
+    deps:
+    - dataset/train_data.csv
+    outs:
+    - model/lr_model.pkl
+  predict:
+    cmd: python src/predict.py
+    deps:
+    - model/lr_model.pkl
+    outs:
+    - results/result.csv

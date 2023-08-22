@@ -3,15 +3,17 @@ import pandas as pd
 from sklearn.metrics import accuracy_score
 
 # Read the test dataset
-test_data = pd.read_csv('LogisticRegression/dataset/test_data.csv')
+test_data = pd.read_csv('dataset/test_data.csv')
 X_test = test_data[['feature1', 'feature2']].values
 y_test = test_data[['label']].values
 
 # Load the model from the pickle file
-with open('LogisticRegression/model/lr_model.pkl', 'rb') as file:
+with open('model/lr_model.pkl', 'rb') as file:
     loaded_model = pickle.load(file)
 
 # Test the loaded model on test data
 y_pred = loaded_model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy of the loaded model: {accuracy:.2f}")
+
+test_data.to_csv('results/result.csv', index=False)

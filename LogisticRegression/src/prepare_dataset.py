@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 # Read data from CSV file
-data = pd.read_csv('dataset/synthetic_data.csv')
+data = pd.read_csv('../dataset/synthetic_data.csv')
 X = data[['feature1', 'feature2']].values
 y = data['label'].values
 
@@ -15,7 +15,7 @@ train_data["feature1"] = [x[0] for x in X_train.tolist()]
 train_data["feature2"] = [x[1] for x in X_train.tolist()]
 train_data["label"] = y_train.tolist()
 
-train_data.to_csv('LogisticRegression/dataset/train_data.csv', index=False)
+train_data.to_csv('dataset/train_data.csv', index=False)
 
 # save test dataset
 test_data = pd.DataFrame()
@@ -23,4 +23,4 @@ test_data["feature1"] = [x[0] for x in X_test.tolist()]
 test_data["feature2"] = [x[1] for x in X_test.tolist()]
 test_data["label"] = y_test.tolist()
 
-test_data.to_csv('LogisticRegression/dataset/test_data.csv', index=False)
+test_data.to_csv('dataset/test_data.csv', index=False)

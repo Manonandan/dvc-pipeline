@@ -1,0 +1,49 @@
+schema: '2.0'
+stages:
+  create_data:
+    cmd: python3 ../create_data.py
+    outs:
+    - path: dataset/synthetic_data.csv
+      hash: md5
+      md5: 6a954f5181eb1c29d942bbb2e0ad8757
+      size: 40594
+  pre_process:
+    cmd: python3 src/prepare_dataset.py
+    deps:
+    - path: dataset/synthetic_data.csv
+      hash: md5
+      md5: 6a954f5181eb1c29d942bbb2e0ad8757
+      size: 40594
+    outs:
+    - path: dataset/test_data.csv
+      hash: md5
+      md5: 526aad83400a3bdc3ffc507f8533f046
+      size: 7972
+    - path: dataset/train_data.csv
+      hash: md5
+      md5: 696788ef23b3b41276ea985b75d5f0e5
+      size: 31856
+  train:
+    cmd: python src/train_model.py --force
+    deps:
+    - path: dataset/train_data.csv
+      hash: md5
+      md5: 696788ef23b3b41276ea985b75d5f0e5
+      size: 31856
+    outs:
+    - path: model/lr_model.pkl
+      hash: md5
+      md5: e7b11ae943a6338f6af01eb91563fb6d
+      size: 724
+  predict:
+    cmd: python src/predict.py
+    deps:
+    - path: model/lr_model.pkl
+      hash: md5
+      md5: e7b11ae943a6338f6af01eb91563fb6d
+      size: 724
+    outs:
+    - path: results/result.csv
+      hash: md5
+      md5: 526aad83400a3bdc3ffc507f8533f046
+      size: 7972
